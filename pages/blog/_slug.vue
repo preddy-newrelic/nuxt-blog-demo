@@ -83,8 +83,16 @@
   </article>
 </template>
 <script>
+import axios from '~/plugins/axios-api'
 export default {
   async asyncData({ $content, params }) {
+    try {
+      let data = await axios.get('https://finance.yahoo.com/quote/PLUG?p=PLUG')
+      console.log(data)
+      // handle error
+    } catch(e) {
+      
+    }
     const article = await $content('articles', params.slug).fetch()
     const tagsList = await $content('tags')
       .only(['name', 'slug'])
